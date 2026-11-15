@@ -19,6 +19,8 @@
     "formidable": "^3.5.4"
   },
   "devDependencies": {
-    "nodemon": "^3.1.10"
+    "@tailwindcss/cli": "^4.3.5",
+    "nodemon": "^3.1.10",
+    "tailwindcss": "^4.3.5"
   }
 }
