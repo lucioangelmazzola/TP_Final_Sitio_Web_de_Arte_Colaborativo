@@ -19,6 +19,15 @@ body {
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'FingerPrinted';
+  src: url('/public/fonts/Finger Printed.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
   --font-sans: "RomanAntique", sans-serif;
+  --font-title: "FingerPrinted";
 }
