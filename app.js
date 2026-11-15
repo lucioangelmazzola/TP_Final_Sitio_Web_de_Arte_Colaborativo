@@ -42,6 +42,11 @@ app.use(session({
     secret: 'clave secreta en el servidor'  // Clave de cifrado para firmar el ID de la sesión.
 }));
 
+// Esto siempre debe ir después de la configuración de la sesión, para que `req.session` esté disponible.
+app.use((req, res, next) => {
+    res.locals.user = req.session.user;
+    next();
+});
 
 // Recursos púbicos. Puede contener hojas de estilo,
 // imágenes o sripts del lado del cliente para el sitio.

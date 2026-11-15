@@ -1,11 +1,56 @@
-<nav>
-    <a href="/">Pagina Principal</a>
-    <a href="/login">Login</a>
-    <a href="/signup">Sign Up</a>
-    <a href="/user/profile">Profile</a>
-    <a href="/user">User</a>
-    <a href="/about">About</a>
-    <a href="/obra">Obra</a>
-    <a href="/user/upload">Upload</a>
-    <a href="/user/logout">Log Out</a>
+<nav aria-label="Navegación principal">
+    <button
+        id="drawer-toggle"
+        type="button"
+        class="fixed right-4 top-4 z-[60] flex flex-col gap-1.5 p-2"
+        aria-label="Abrir menú"
+        aria-controls="side-drawer"
+        aria-expanded="false">
+        <span class="block h-0.5 w-8 bg-white"></span>
+        <span class="block h-0.5 w-8 bg-white"></span>
+        <span class="block h-0.5 w-8 bg-white"></span>
+    </button>
+
+    <div
+        id="drawer-backdrop"
+        class="pointer-events-none fixed inset-0 z-40 bg-black/30 opacity-0 transition-opacity duration-300"
+        aria-hidden="true">
+    </div>
+
+    <aside
+        id="side-drawer"
+        class="fixed right-0 top-0 z-50 flex h-screen w-64 max-w-[85vw] translate-x-full flex-col bg-black/85 px-6 pb-8 pt-20 text-white shadow-xl transition-transform duration-300 ease-in-out"
+        aria-label="Menú lateral"
+        aria-hidden="true"
+        inert>
+
+        <div class="flex flex-1 flex-col justify-center gap-5 text-center">
+            <% if (user) { %>
+                <a class="py-1 text-lg hover:text-gray-300" href="/user">Cuestionario</a>
+                <hr class="border-white/80">
+
+                <a class="py-1 text-lg hover:text-gray-300" href="/">Pagina Principal</a>
+                <a class="py-1 text-lg hover:text-gray-300" href="/user/profile">Mi Perfil</a>
+                <a class="py-1 text-lg hover:text-gray-300" href="/user/upload">Publicar</a>
+                <a class="py-1 text-lg hover:text-gray-300" href="#">Configuración</a>
+                <a class="py-1 text-lg hover:text-gray-300" href="#">Resultados</a>
+                <a class="py-1 text-lg hover:text-gray-300" href="#">Videojuego</a>
+
+                <hr class="border-white/80">
+            <% } else { %>
+                <a class="py-1 text-lg hover:text-gray-300" href="/login">Iniciar Sesión</a>
+                <a class="py-1 text-lg hover:text-gray-300" href="/signup">Registrarse</a>
+
+                <hr class="border-white/80">
+
+                <a class="py-1 text-lg hover:text-gray-300" href="#">Configuración</a>
+            <% } %>
+        </div>
+
+        <% if (user) { %>
+            <a class="mt-6 py-2 text-center text-lg hover:text-gray-300" href="/user/logout">
+                Cerrar Sesión
+            </a>
+        <% } %>
+    </aside>
 </nav>
