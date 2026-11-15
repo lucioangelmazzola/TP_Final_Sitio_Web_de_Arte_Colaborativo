@@ -14,8 +14,6 @@
     --text-base--line-height: calc(1.5 / 1);
     --text-lg: 1.125rem;
     --text-lg--line-height: calc(1.75 / 1.125);
-    --text-5xl: 3rem;
-    --text-5xl--line-height: 1;
     --text-7xl: 4.5rem;
     --text-7xl--line-height: 1;
     --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
@@ -486,7 +484,7 @@
 body {
   min-height: 100vh;
   margin: 0;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url('/public/img/fondo.jpeg');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.10), rgba(0, 0, 0, 0.10)), url('/public/img/fondo.jpeg');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
