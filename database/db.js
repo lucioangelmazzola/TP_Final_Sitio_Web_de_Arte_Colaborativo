@@ -13,6 +13,13 @@ const file = fs.readFileSync(filePath, 'utf-8');
 // Crea la tabla si no existe, `exec` es lo mismo que `run` pero se usa para hacer varias cosas de uan.
 db.exec(file);
 
+db.exec(`
+    CREATE TABLE IF NOT EXISTS user_avatars (
+        username TEXT PRIMARY KEY,
+        avatar_path TEXT NOT NULL
+    )
+`);
+
 
 /**
  * Imprime el contenido de la base de datos.
@@ -133,21 +140,33 @@ exports.updateUser = (oldUsername, newUsername, newHash) => {
         const finalHash = newHash || currentUser.hash;
 
         if (newUsername && newUsername !== oldUsername) {
-            // 2. Insertamos el usuario con el nuevo nombre en 'users'
+            // Inserta el usuario con el nuevo nombre en 'users'
             db.prepare('INSERT INTO users (username, email, hash) VALUES (?, ?, ?)').run(newUsername, currentUser.email, finalHash);
 
-            // 3. Reasignamos sus imágenes en 'user_images' al nuevo nombre
+            // Reasigna sus imágenes en 'user_images' al nuevo nombre
             db.prepare('UPDATE user_images SET username = ? WHERE username = ?').run(newUsername, oldUsername);
 
-            // 4. Eliminamos el usuario viejo de 'users' (ahora que ya no tiene imágenes asociadas)
+            // Elimina el usuario viejo de 'users'
             db.prepare('DELETE FROM users WHERE username = ?').run(oldUsername);
+
+            // Guarda el avatar aunque se cambie el username
+            db.prepare('UPDATE user_avatars SET username = ? WHERE username = ?').run(newUsername, oldUsername);
         } else if (newHash) {
-            // Si solo cambió la contraseña sin cambiar el nombre
+            // Cambia la contraseña sin cambiar el nombre
             db.prepare('UPDATE users SET hash = ? WHERE username = ?').run(finalHash, oldUsername);
         }
     });
 
     actualizar();
+};
+
+exports.setUserAvatar = (username, avatarPath) => {
+    db.prepare('INSERT OR REPLACE INTO user_avatars (username, avatar_path) VALUES (?, ?)').run(username, avatarPath);
+};
+
+exports.getUserAvatar = (username) => {
+    const row = db.prepare('SELECT avatar_path FROM user_avatars WHERE username = ?').get(username);
+    return row ? row.avatar_path : null;
 };
 
 // Siempre cerrar la conexión, apagar, al terminar.

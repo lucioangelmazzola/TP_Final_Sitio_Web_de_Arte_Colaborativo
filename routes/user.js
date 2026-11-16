@@ -5,8 +5,6 @@ const db = require('../database/db.js');
 
 const router = express.Router();
 
-const avataresUsuarios = {};
-
 /**
  * En app.js se insertan estas rutas en '/users'
  * con la expresión:
@@ -42,6 +40,57 @@ function restricted(req, res, next) {
 
 router.use(restricted);
 
+const monstruos = {
+    ciervo: {
+        titulo: 'EL CIERVO',
+        imagen: '/public/img/CiervoM.png',
+        descripcion: 'Es una criatura que acecha silenciosamente en los bosques, camuflándose entre los árboles para seguir a sus víctimas sin ser detectada. Astuta, paciente y extremadamente veloz, espera el momento perfecto para atacar, persiguiendo a su presa hasta que ya no tenga escapatoria.'
+    },
+    arana: {
+        titulo: 'EL ARACNIDO',
+        imagen: '/public/img/AranaM.png',
+        descripcion: 'Es una criatura corpulenta hecha de tela vieja y desgastada que deambula sin rumbo aparente. Curiosa y ruidosa, se acerca a cualquier cosa que llame su atención, sin distinguir entre amigos y enemigos. Aunque su comportamiento parece neutral, su enorme cuerpo y sus movimientos bruscos la convierten en una presencia amenazadora para cualquiera que se cruce en su camino.'
+    },
+    espectro: {
+        titulo: 'EL ESPECTRO',
+        imagen: '/public/img/FantasmaM.png',
+        descripcion: 'Es una criatura extremadamente inteligente y cautelosa que acecha a sus víctimas desde las sombras. De cuerpo delgado y alargado, utiliza su astucia para manipular la mente de quienes persigue, provocando miedo y confusión hasta conducirlos a trampas cuidadosamente planeadas. Aunque es asustadiza y evita el enfrentamiento directo, puede acorralar a sus presas mediante estrategias y juegos psicológicos, convirtiendo la cacería en una tortura mental.'
+    },
+    oso: {
+        titulo: 'EL OSITO',
+        imagen: '/public/img/OsoM.png',
+        descripcion: 'Es una entidad demoníaca que acecha silenciosamente a sus víctimas, utilizando su inteligencia para imitar voces, sonidos e incluso comportamientos familiares. Disfruta jugando con la mente de quienes persigue, engañándolos y atrayéndolos hacia situaciones cada vez más aterradoras. Astuta y manipuladora, rara vez ataca directamente: prefiere quebrar psicológicamente a sus presas antes de acabar con ellas.'
+    }
+};
+
+// Mostrar el test
+router.get('/cuestionario', (req, res) => {
+    res.render('cuestionario');
+});
+
+// Calcular el monstruo ganador
+router.post('/cuestionario', (req, res) => {
+    const puntos = { ciervo: 0, arana: 0, espectro: 0, oso: 0 };
+
+    // Recorre todas las respuestas enviadas y suma 1 punto al monstruo elegido
+    for (let pregunta in req.body) {
+        const voto = req.body[pregunta];
+        if (puntos[voto] !== undefined) {
+            puntos[voto]++;
+        }
+    }
+
+    // Busca cuál monstruo sacó más puntos
+    let ganador = 'espectro';
+    for (let tipo in puntos) {
+        if (puntos[tipo] > puntos[ganador]) {
+            ganador = tipo;
+        }
+    }
+
+    // Renderiza la página enviando los datos del monstruo ganador
+    res.render('cuestionario', { resultado: monstruos[ganador] });
+});
 
 /**
  * Página principal de usuario/a.
@@ -55,7 +104,7 @@ router.get('/', (req, res, next) => {
     res.render('user', { 
         pageTitle: 'Usuario', 
         images: imgPaths,
-        avatar: avataresUsuarios[username] || '/public/img/avatar-default.png'
+        avatar: db.getUserAvatar(username) || '/public/img/avatar-default.gif'
     });
 });
 
@@ -72,7 +121,7 @@ router.get('/profile', (req, res, next) => {
     res.render('profile', { 
         pageTitle: 'Perfil', 
         images: imgPaths,
-        avatar: avataresUsuarios[username] || '/public/img/avatar-default.png'
+        avatar: db.getUserAvatar(username) || '/public/img/avatar-default.gif'
     });
 });
 
@@ -85,7 +134,7 @@ router.get('/settings', (req, res, next) => {
     const username = req.session.user;
     res.render('settings', { 
         pageTitle: 'Configuración',
-        avatar: avataresUsuarios[username] || '/public/img/avatar-default.png'
+        avatar: db.getUserAvatar(username) || '/public/img/avatar-default.gif'
     });
 });
 
@@ -106,13 +155,13 @@ router.post('/settings', (req, res, next) => {
 
         let username = req.session.user;
 
-        // 1. Si subió una foto nueva, la guardamos
+        // Se guarda la nueva foto
         if (files.avatarFile && files.avatarFile.length > 0 && files.avatarFile[0].size > 0) {
             const archivo = files.avatarFile[0];
-            avataresUsuarios[username] = '/uploads/' + archivo.newFilename;
+            db.setUserAvatar(username, '/uploads/' + archivo.newFilename);
         }
 
-        // 2. Leemos el nuevo nombre y la nueva contraseña (si escribió algo)
+        // Lee el nuevo nombre y la nueva contraseña
         const newUsername = fields.newUsername ? fields.newUsername[0].trim() : '';
         const newPassword = fields.newPassword ? fields.newPassword[0].trim() : '';
 
@@ -128,12 +177,8 @@ router.post('/settings', (req, res, next) => {
 
             db.updateUser(username, newUsername, newHash);
 
-            // Si cambió su nombre, actualizamos también la sesión y movemos su avatar al nuevo nombre
+            // Actualiza la sesión y se mueve su avatar al nuevo nombre
             if (newUsername && newUsername !== username) {
-                if (avataresUsuarios[username]) {
-                    avataresUsuarios[newUsername] = avataresUsuarios[username];
-                    delete avataresUsuarios[username];
-                }
                 req.session.user = newUsername;
             }
         }

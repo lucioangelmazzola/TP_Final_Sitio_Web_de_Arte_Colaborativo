@@ -1,5 +1,37 @@
-<% for(let img of locals.images) { -%>
-    <div>
-        <img src=<%= img %> alt="imagen de usuario" width=400>
-    </div>
-<% } %>
+<!-- Cuadrícula de miniaturas -->
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+    <% for (let img of locals.images) { %>
+        <div onclick="abrirImagen('<%= img %>')" class="group relative overflow-hidden rounded-xl border-2 border-red-900/70 bg-black/80 p-3 shadow-xl shadow-red-950/60 transition-all duration-200 hover:border-red-500 cursor-pointer">
+            <div class="overflow-hidden rounded-lg">
+                <img src="<%= img %>" alt="imagen de usuario" class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105">
+            </div>
+        </div>
+    <% } %>
+</div>
+
+<!-- Visor en pantalla completa -->
+<div id="modalImagen" onclick="cerrarImagen()" class="hidden fixed inset-0 z-50 bg-black/90 flex flex-col items-center justify-center p-4 cursor-pointer">
+
+    <!-- Imagen completa -->
+    <img id="imagenGrande" src="" alt="Vista completa" onclick="event.stopPropagation()" class="max-w-full max-h-[80vh] object-contain rounded-xl border-2 border-red-700 shadow-2xl shadow-red-950 cursor-default">
+</div>
+
+<script>
+    const modal = document.getElementById('modalImagen');
+    const imagenGrande = document.getElementById('imagenGrande');
+
+    function abrirImagen(ruta) {
+        imagenGrande.src = ruta;
+        modal.classList.remove('hidden'); // Muestra el visor
+    }
+
+    function cerrarImagen() {
+        modal.classList.add('hidden'); // Oculta el visor
+        imagenGrande.src = '';
+    }
+
+    // También se cierra al apretar la tecla Escape
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') cerrarImagen();
+    });
+</script>

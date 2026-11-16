@@ -10,9 +10,15 @@
         <p class="font-title3 mt-2 text-7xl text-red-800 md:text-9xl drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">PEORES <br>PESADILLAS!</p>
     </div>
 
-    <a href="/login" class="z-10 mt-6 inline-block bg-black/90 hover:bg-[#610505] text-white font-title2 text-2xl tracking-wider px-8 py-3 rounded-xl border-2 border-red-500/50 transition-all duration-100 hover:scale-105">
-        ¡Inicia Sesion para arrancar el cuestionario!
-    </a>
+    <% if (locals.user) { %>
+        <a href="/user/cuestionario" class="z-10 mt-6 inline-block bg-black/90 hover:bg-[#610505] text-white font-title2 text-2xl tracking-wider px-8 py-3 rounded-xl border-2 border-red-500/50 transition-all duration-100 hover:scale-105">
+            ¡Hacer el cuestionario ahora!
+        </a>
+    <% } else { %>
+        <a href="/login" class="z-10 mt-6 inline-block bg-black/90 hover:bg-[#610505] text-white font-title2 text-2xl tracking-wider px-8 py-3 rounded-xl border-2 border-red-500/50 transition-all duration-100 hover:scale-105">
+            ¡Inicia Sesion para arrancar el cuestionario!
+        </a>
+    <% } %>
 </div>
 
 <%- include('partials/foot') %>
