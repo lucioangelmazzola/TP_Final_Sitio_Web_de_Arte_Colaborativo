@@ -35,6 +35,14 @@ body {
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'ShadowsFright';
+  src: url('/public/fonts/ShadowsFright.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 .texto-grande {
   font-size: 24px;
 }
@@ -47,4 +55,5 @@ body {
   --font-sans: "RomanAntique", sans-serif;
   --font-title1: "FingerPrinted";
   --font-title2: "Scary";
+  --font-title3: "ShadowsFright";
 }

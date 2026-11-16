@@ -1,3 +1,4 @@
+// Contenedor semántico principal de navegación; aria-label ayuda a lectores de pantalla
 const menuButton = document.getElementById('drawer-toggle');
 const drawer = document.getElementById('side-drawer');
 const backdrop = document.getElementById('drawer-backdrop');

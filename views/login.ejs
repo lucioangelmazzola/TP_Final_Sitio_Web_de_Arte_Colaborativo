@@ -2,24 +2,67 @@
 <div id="canvas-particulas" class="fixed inset-0 pointer-events-none z-1"></div>
 <%- include('partials/nav') %>
 <div class="flex min-h-[calc(100vh-80px)] flex-col items-center justify-center px-2 text-center">
-    <h1 class="font-title2 mb-3 text-9xl text-white md:text-9xl z-10">Página de logueo</h1>
 
     <!-- Formulario para enviar el método POST de HTTP -->
     <form action="/login" method="POST" class="w-full flex justify-center">
         <div class="relative z-10 flex flex-col items-center justify-center py-16 px-12 md:py-64 md:px-64 w-full max-w-[1080px]">
             <img src="/public/img/CuadroSesionG.gif" alt="Marco" class="absolute inset-0 w-full h-full object-fill -z-10 pointer-events-none">
-            <div>
-                <label for="usernameElementID" class="mb-3 text-5xl text-white md:text-5xl">Nombre: </label>
-                <input name="username" id="usernameElementID" class="mb-3 text-5xl text-[#C7C7C7] bg-black/30 md:text-4xl border-2 border-red-500/50" value="Nombre de Usuario" />
+            
+            <!-- Titulo del formulario -->            
+            <h1 class="font-title3 text-center mb-6 text-6xl text-[#c94a18] md:text-[68px] z-10 drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">Página de logueo</h1>
+            <!-- Contenedor interno alineado -->
+                <div class="w-full max-w-md space-y-5 text-left">
+                
+                <!-- Campo Nombre de Usuario -->
+                <div>
+                    <label for="usernameElementID" class="block text-xl md:text-2xl text-[#f4e8c1] font-title2 mb-1.5">
+                    Nombre de Usuario
+                    </label>
+                    <input 
+                    type="text"
+                    name="username" 
+                    id="usernameElementID" 
+                    placeholder="Ej. CondeDracula"
+                    required
+                    class="w-full px-4 py-2.5 text-lg md:text-xl text-[#f4e8c1] placeholder-[#8c7b70] bg-black/60 border-2 border-[#8b261d] rounded-md focus:outline-none focus:border-[#e86a17] focus:ring-1 focus:ring-[#e86a17] transition"
+                    >
+                </div>
+
+                <!-- Campo Clave -->
+                <div>
+                    <label for="passwordElementID" class="block text-xl md:text-2xl text-[#f4e8c1] font-title2 mb-1.5">
+                    Contraseña
+                    </label>
+                    <input 
+                    type="password" 
+                    name="password" 
+                    id="passwordElementID" 
+                    placeholder="••••••••"
+                    required
+                    class="w-full px-4 py-2.5 text-lg md:text-xl text-[#f4e8c1] placeholder-[#8c7b70] bg-black/60 border-2 border-[#8b261d] rounded-md focus:outline-none focus:border-[#e86a17] focus:ring-1 focus:ring-[#e86a17] transition"
+                    >
+                </div>
+
+                <!-- Botón de Iniciar Sesión -->
+                <div class="pt-3">
+                    <button 
+                    type="submit" 
+                    class="w-full py-3 px-6 text-2xl md:text-3xl font-title2 text-[#fff8eb] bg-[#c94a18] hover:bg-[#e05822] border-2 border-[#f4e8c1]/40 rounded-md shadow-lg hover:shadow-[0_0_15px_rgba(232,106,23,0.6)] transition duration-200 cursor-pointer"
+                    >
+                    Iniciar Sesión
+                    </button>
+                </div>
+
+                <!-- Enlace hacia el Registro -->
+                <div class="text-center pt-2 text-base md:text-lg text-[#d6c7b2]">
+                    ¿No tienes cuenta? 
+                    <a href="/signup" class="text-[#ff8c38] hover:text-[#ffb074] underline underline-offset-4 font-title2">
+                    Regístrate aquí
+                    </a>
+                </div>
+
+                </div>
             </div>
-            <div>
-                <label for="passwordElementID" class="mb-3 text-5xl text-white md:text-5xl">Clave: </label>
-                <input name="password" id="passwordElementID" class="mb-3 text-5xl text-[#C7C7C7] bg-black/30 md:text-4xl border-2 border-red-500/50" value="Contraseña" />
-            </div>
-            <div>
-                <button type="submit" class="mt-8 px-2 py-2 mb-3 text-5xl text-white bg-black/30 md:text-5xl border-2 border-red-500/50 rounded-xl transition-all duration-100 hover:scale-105 hover:bg-[#610505]" >Iniciar Sesion</button>
-            </div>
-        </div>
-    </form>
-</div>
+        </form>
+    </div>
 <%- include('partials/foot') %>
