@@ -39,6 +39,10 @@ body {
   font-size: 24px;
 }
 
+.texto-title {
+  font-size: 150px;
+}
+
 @theme {
   --font-sans: "RomanAntique", sans-serif;
   --font-title1: "FingerPrinted";
