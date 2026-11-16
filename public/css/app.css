@@ -484,7 +484,7 @@
 body {
   min-height: 100vh;
   margin: 0;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.10), rgba(0, 0, 0, 0.10)), url('/public/img/fondo.jpeg');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.50), rgba(0, 0, 0, 0.10)), url('/public/img/fondo.jpeg');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
