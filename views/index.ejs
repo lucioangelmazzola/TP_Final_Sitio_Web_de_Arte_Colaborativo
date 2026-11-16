@@ -1,8 +1,18 @@
 <%- include('partials/head') %>
 <div id="canvas-particulas" class="fixed inset-0 pointer-events-none z-1"></div>
-<div class="flex min-h-screen flex-col items-center justify-center px-2 text-center">
+<div class="flex min-h-[calc(100vh-80px)] flex-col items-center justify-center px-2 text-center">
     <%- include('partials/nav') %>
-        <h1 class="font-title2 md-3 text-7xl font-bold text-white md:text-8xl z-10">¡BIENVENIDOS A SUS</h1>
-        <p class="font-title1 mt-2 text-7xl font-boldleading-none text-red-800 md:text-9xl z-10">PEORES <br>PESADILLAS!</p>
+    <div class="relative z-10 flex flex-col items-center justify-center py-16 px-12 md:py-24 md:px-24 w-full max-w-[1920px]">
+
+        <img src="/public/img/CuadroSesionG.gif" alt="Marco" class="absolute inset-0 w-full h-full object-fill -z-10 pointer-events-none">
+
+        <h1 class="font-title2 mb-3 text-7xl font-bold text-white md:text-8xl">¡BIENVENIDOS A SUS</h1>
+        <p class="font-title1 mt-2 text-7xl text-red-800 md:text-9xl">PEORES <br>PESADILLAS!</p>
+    </div>
+
+    <a href="/login" class="z-10 mt-6 inline-block bg-black/90 hover:bg-[#610505] text-white font-title2 text-2xl tracking-wider px-8 py-3 rounded-xl border-2 border-red-500/50 transition-all duration-100 hover:scale-105">
+        ¡Inicia Sesion para arrancar el cuestionario!
+    </a>
 </div>
+
 <%- include('partials/foot') %>

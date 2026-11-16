@@ -1,0 +1,190 @@
+<%- include('partials/head') %>
+<div id="canvas-particulas" class="fixed inset-0 pointer-events-none z-1"></div>
+<%- include('partials/nav') %>
+
+<main class="relative z-10 flex min-h-[calc(100vh-80px)] flex-col items-center justify-center px-4 py-10 text-white">
+    <h1 class="font-title2 mb-6 text-5xl md:text-7xl text-center">Cuestionario "Normal"</h1>
+
+    <form action="/cuestionario" method="POST" class="w-full max-w-4xl bg-black/75 border-2 border-[#332422] rounded-2xl p-8 md:p-12 shadow-2xl shadow-red-950/80 flex flex-col gap-8">
+        
+        <!-- Pregunta 1 -->
+        <div class="border-b border-[#332422] pb-6">
+            <p class="text-2xl md:text-3xl font-bold mb-4 text-red-400">1. Si tuvieras que atravesar una habitación completamente oscura, ¿cómo lo harías?</p>
+            <div class="flex flex-col gap-3 text-xl text-[#C7C7C7]">
+                <label class="flex items-center gap-3 cursor-pointer hover:text-white">
+                    <input type="radio" name="p1" value="vampiro" required class="accent-red-600 w-5 h-5">
+                    <span>Avanzaría rápidamente hasta encontrar la salida.</span>
+                </label>
+                <label class="flex items-center gap-3 cursor-pointer hover:text-white">
+                    <input type="radio" name="p1" value="licantropo" class="accent-red-600 w-5 h-5">
+                    <span>Iría despacio, no quisiera chocarme con nada.</span>
+                </label>
+                <label class="flex items-center gap-3 cursor-pointer hover:text-white">
+                    <input type="radio" name="p1" value="fantasma" class="accent-red-600 w-5 h-5">
+                    <span>Buscaría algo que pueda utilizar para iluminar.</span>
+                </label>
+                <label class="flex items-center gap-3 cursor-pointer hover:text-white">
+                    <input type="radio" name="p1" value="demonio" class="accent-red-600 w-5 h-5">
+                    <span>Esperaría un momento para acostumbrarme a la oscuridad.</span>
+                </label>
+            </div>
+        </div>
+
+        <!-- Pregunta 2 -->
+        <div class="border-b border-[#332422] pb-6">
+            <p class="text-2xl md:text-3xl font-bold mb-4 text-red-400">2. Estás frente a una casa abandonada, desde el otro lado de la puerta escuchás tres golpes. ¿Que haces?</p>
+            <div class="flex flex-col gap-3 text-xl text-[#C7C7C7]">
+                <label class="flex items-center gap-3 cursor-pointer hover:text-white">
+                    <input type="radio" name="p2" value="vampiro" required class="accent-red-600 w-5 h-5">
+                    <span>Golpeo la puerta tres veces también.</span>
+                </label>
+                <label class="flex items-center gap-3 cursor-pointer hover:text-white">
+                    <input type="radio" name="p2" value="licantropo" class="accent-red-600 w-5 h-5">
+                    <span>Abro la puerta para descubrir qué sucede.</span>
+                </label>
+                <label class="flex items-center gap-3 cursor-pointer hover:text-white">
+                    <input type="radio" name="p2" value="fantasma" class="accent-red-600 w-5 h-5">
+                    <span>Busco otra entrada.</span>
+                </label>
+                <label class="flex items-center gap-3 cursor-pointer hover:text-white">
+                    <input type="radio" name="p2" value="demonio" class="accent-red-600 w-5 h-5">
+                    <span>Me alejo, no parece buena idea.</span>
+                </label>
+            </div>
+        </div>
+
+        <!-- Pregunta 3 -->
+        <div class="border-b border-[#332422] pb-6">
+            <p class="text-2xl md:text-3xl font-bold mb-4 text-red-400">3. ¿Que tipo de animal te gusta mas?</p>
+            <div class="flex flex-col gap-3 text-xl text-[#C7C7C7]">
+                <label class="flex items-center gap-3 cursor-pointer hover:text-white">
+                    <input type="radio" name="p3" value="vampiro" required class="accent-red-600 w-5 h-5">
+                    <span>Las arañas</span>
+                </label>
+                <label class="flex items-center gap-3 cursor-pointer hover:text-white">
+                    <input type="radio" name="p3" value="licantropo" class="accent-red-600 w-5 h-5">
+                    <span>Los zorros</span>
+                </label>
+                <label class="flex items-center gap-3 cursor-pointer hover:text-white">
+                    <input type="radio" name="p3" value="fantasma" class="accent-red-600 w-5 h-5">
+                    <span>Los cuervos</span>
+                </label>
+                <label class="flex items-center gap-3 cursor-pointer hover:text-white">
+                    <input type="radio" name="p3" value="demonio" class="accent-red-600 w-5 h-5">
+                    <span>Los perros</span>
+                </label>
+            </div>
+        </div>
+
+        <!-- Pregunta 4 -->
+        <div class="border-b border-[#332422] pb-6">
+            <p class="text-2xl md:text-3xl font-bold mb-4 text-red-400">4. ¿Que objeto guardarias aunque se rompiera?</p>
+            <div class="flex flex-col gap-3 text-xl text-[#C7C7C7]">
+                <label class="flex items-center gap-3 cursor-pointer hover:text-white">
+                    <input type="radio" name="p3" value="vampiro" required class="accent-red-600 w-5 h-5">
+                    <span>Una taza</span>
+                </label>
+                <label class="flex items-center gap-3 cursor-pointer hover:text-white">
+                    <input type="radio" name="p3" value="licantropo" class="accent-red-600 w-5 h-5">
+                    <span>Un mate de madera</span>
+                </label>
+                <label class="flex items-center gap-3 cursor-pointer hover:text-white">
+                    <input type="radio" name="p3" value="fantasma" class="accent-red-600 w-5 h-5">
+                    <span>Un peluche</span>
+                </label>
+                <label class="flex items-center gap-3 cursor-pointer hover:text-white">
+                    <input type="radio" name="p3" value="demonio" class="accent-red-600 w-5 h-5">
+                    <span>Un celular</span>
+                </label>
+            </div>
+        </div>
+
+        <!-- Pregunta 5 -->
+        <div class="border-b border-[#332422] pb-6">
+            <p class="text-2xl md:text-3xl font-bold mb-4 text-red-400">5. ¿A que desastre natural tendrias menos chances de sobrevivir?</p>
+            <div class="flex flex-col gap-3 text-xl text-[#C7C7C7]">
+                <label class="flex items-center gap-3 cursor-pointer hover:text-white">
+                    <input type="radio" name="p3" value="vampiro" required class="accent-red-600 w-5 h-5">
+                    <span>Un Tsunami</span>
+                </label>
+                <label class="flex items-center gap-3 cursor-pointer hover:text-white">
+                    <input type="radio" name="p3" value="licantropo" class="accent-red-600 w-5 h-5">
+                    <span>Un Tornado</span>
+                </label>
+                <label class="flex items-center gap-3 cursor-pointer hover:text-white">
+                    <input type="radio" name="p3" value="fantasma" class="accent-red-600 w-5 h-5">
+                    <span>Un Terremoto</span>
+                </label>
+                <label class="flex items-center gap-3 cursor-pointer hover:text-white">
+                    <input type="radio" name="p3" value="demonio" class="accent-red-600 w-5 h-5">
+                    <span>Una Erupcion Volcanica</span>
+                </label>
+            </div>
+        </div>
+
+        <!-- Pregunta 6 -->
+        <div class="border-b border-[#332422] pb-6">
+            <p class="text-2xl md:text-3xl font-bold mb-4 text-red-400">6. ¿Cual es tu deporte preferido?</p>
+            <div class="flex flex-col gap-3 text-xl text-[#C7C7C7]">
+                <label class="flex items-center gap-3 cursor-pointer hover:text-white">
+                    <input type="radio" name="p3" value="vampiro" required class="accent-red-600 w-5 h-5">
+                    <span>Futbol</span>
+                </label>
+                <label class="flex items-center gap-3 cursor-pointer hover:text-white">
+                    <input type="radio" name="p3" value="licantropo" class="accent-red-600 w-5 h-5">
+                    <span>Basket</span>
+                </label>
+                <label class="flex items-center gap-3 cursor-pointer hover:text-white">
+                    <input type="radio" name="p3" value="fantasma" class="accent-red-600 w-5 h-5">
+                    <span>Natacion</span>
+                </label>
+                <label class="flex items-center gap-3 cursor-pointer hover:text-white">
+                    <input type="radio" name="p3" value="demonio" class="accent-red-600 w-5 h-5">
+                    <span>Ajedrez</span>
+                </label>
+            </div>
+        </div>
+
+        <!-- Pregunta 7 -->
+        <div class="border-b border-[#332422] pb-6">
+            <p class="text-2xl md:text-3xl font-bold mb-4 text-red-400">7. Si tu sombra se desprende de vos e intenta guiarte a algun lado con desesperacion, ¿Que harias?</p>
+            <div class="flex flex-col gap-3 text-xl text-[#C7C7C7]">
+                <label class="flex items-center gap-3 cursor-pointer hover:text-white">
+                    <input type="radio" name="p3" value="vampiro" required class="accent-red-600 w-5 h-5">
+                    <span>La sigo, capaz me quiere salvar de algo.</span>
+                </label>
+                <label class="flex items-center gap-3 cursor-pointer hover:text-white">
+                    <input type="radio" name="p3" value="licantropo" class="accent-red-600 w-5 h-5">
+                    <span>La ignoro, seguro es solo alucinacion mia.</span>
+                </label>
+                <label class="flex items-center gap-3 cursor-pointer hover:text-white">
+                    <input type="radio" name="p3" value="fantasma" class="accent-red-600 w-5 h-5">
+                    <span>Escapo de ella, tal vez me quiere lastimar.</span>
+                </label>
+            </div>
+        </div>
+
+        <!-- Botón de envío -->
+        <div class="text-center">
+            <button type="submit" class="px-8 py-3 text-3xl text-white bg-black/60 border-2 border-red-500/50 rounded-xl transition-all duration-100 hover:scale-105 hover:bg-[#610505] cursor-pointer">
+                Descubrir mi Monstruo
+            </button>
+        </div>
+
+        <!-- Resultado personalizado (aparece al responder) -->
+        <% if (typeof resultado !== 'undefined') { %>
+            <div class="mt-4 p-8 rounded-2xl bg-red-950/70 border-2 border-red-500 flex flex-col items-center text-center shadow-2xl">
+                <p class="text-xl text-[#C7C7C7] mb-2">Tu pesadilla interior es...</p>
+                <h2 class="font-title1 text-5xl md:text-7xl text-red-500 mb-4"><%= resultado.titulo %></h2>
+                
+                <!-- Imagen del monstruo guardado en public/img/ -->
+                <img src="<%= resultado.imagen %>" alt="<%= resultado.titulo %>" class="w-64 h-64 object-cover rounded-xl border-2 border-red-500/50 mb-4 shadow-lg">
+                
+                <p class="text-xl text-white max-w-2xl"><%= resultado.descripcion %></p>
+            </div>
+        <% } %>
+
+    </form>
+</main>
+
+<%- include('partials/foot') %>

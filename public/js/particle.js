@@ -3,13 +3,21 @@ let par = [];
 const CANTIDAD_PARTICLES = 16;
 
 function preload() {
-    partImgs.push(loadImage('/public/img/Calabaza03.gif'));
-    partImgs.push(loadImage('/public/img/Calabaza02.gif'));
-    partImgs.push(loadImage('/public/img/Calabaza01.gif'));
-    partImgs.push(loadImage('/public/img/Arana.gif'));
-    partImgs.push(loadImage('/public/img/Telarana.gif'));
-    partImgs.push(loadImage('/public/img/Murcielago01.gif'));
-    partImgs.push(loadImage('/public/img/Murcielago02.gif'));
+    let calabaza3 = loadImage('/public/img/Calabaza03.gif');
+    let calabaza2 = loadImage('/public/img/Calabaza02.gif');
+    let calabaza1 = loadImage('/public/img/Calabaza01.gif');
+    let arana = loadImage('/public/img/Arana.gif');
+    let telarana = loadImage('/public/img/Telarana.gif');
+    let murcielago1 = loadImage('/public/img/Murcielago01.gif');
+    let murcielago2 = loadImage('/public/img/Murcielago02.gif');
+
+    partImgs.push(calabaza2, calabaza2, calabaza2, calabaza2);
+    partImgs.push(calabaza1, calabaza1, calabaza1, calabaza1);
+    partImgs.push(arana, arana, arana, arana);
+    partImgs.push(murcielago1, murcielago1, murcielago1, murcielago1);
+    partImgs.push(murcielago2, murcielago2, murcielago2);
+    partImgs.push(telarana, telarana, telarana, telarana);
+    partImgs.push(calabaza3);
 }
 
 function setup() {

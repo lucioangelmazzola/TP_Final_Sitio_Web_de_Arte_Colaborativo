@@ -123,6 +123,32 @@ exports.getSketchData = () => {
     return stmt.all();
 }
 
+exports.updateUser = (oldUsername, newUsername, newHash) => {
+    const actualizar = db.transaction(() => {
+        // 1. Buscamos los datos actuales del usuario (email y hash)
+        const currentUser = db.prepare('SELECT email, hash FROM users WHERE username = ?').get(oldUsername);
+        if (!currentUser) return;
+
+        // Si escribió una contraseña nueva usamos ese hash; si no, mantenemos el actual
+        const finalHash = newHash || currentUser.hash;
+
+        if (newUsername && newUsername !== oldUsername) {
+            // 2. Insertamos el usuario con el nuevo nombre en 'users'
+            db.prepare('INSERT INTO users (username, email, hash) VALUES (?, ?, ?)').run(newUsername, currentUser.email, finalHash);
+
+            // 3. Reasignamos sus imágenes en 'user_images' al nuevo nombre
+            db.prepare('UPDATE user_images SET username = ? WHERE username = ?').run(newUsername, oldUsername);
+
+            // 4. Eliminamos el usuario viejo de 'users' (ahora que ya no tiene imágenes asociadas)
+            db.prepare('DELETE FROM users WHERE username = ?').run(oldUsername);
+        } else if (newHash) {
+            // Si solo cambió la contraseña sin cambiar el nombre
+            db.prepare('UPDATE users SET hash = ? WHERE username = ?').run(finalHash, oldUsername);
+        }
+    });
+
+    actualizar();
+};
 
 // Siempre cerrar la conexión, apagar, al terminar.
 // ste código sirve luego para el servidor express.

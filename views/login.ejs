@@ -1,19 +1,25 @@
 <%- include('partials/head') %>
+<div id="canvas-particulas" class="fixed inset-0 pointer-events-none z-1"></div>
 <%- include('partials/nav') %>
-    <h1>Página de logueo</h1>
+<div class="flex min-h-[calc(100vh-80px)] flex-col items-center justify-center px-2 text-center">
+    <h1 class="font-title2 mb-3 text-9xl text-white md:text-9xl z-10">Página de logueo</h1>
 
     <!-- Formulario para enviar el método POST de HTTP -->
-    <form action="/login" method="POST">
-        <div>
-            <label for="usernameElementID">Nombre</label>
-            <input name="username" id="usernameElementID" value="nombre" />
-        </div>
-        <div>
-            <label for="passwordElementID">Clave</label>
-            <input name="password" id="passwordElementID" value="clave" />
-        </div>
-        <div>
-            <button type="submit">Send my greetings</button>
+    <form action="/login" method="POST" class="w-full flex justify-center">
+        <div class="relative z-10 flex flex-col items-center justify-center py-16 px-12 md:py-64 md:px-64 w-full max-w-[1080px]">
+            <img src="/public/img/CuadroSesionG.gif" alt="Marco" class="absolute inset-0 w-full h-full object-fill -z-10 pointer-events-none">
+            <div>
+                <label for="usernameElementID" class="mb-3 text-5xl text-white md:text-5xl">Nombre: </label>
+                <input name="username" id="usernameElementID" class="mb-3 text-5xl text-[#C7C7C7] bg-black/30 md:text-4xl border-2 border-red-500/50" value="Nombre de Usuario" />
+            </div>
+            <div>
+                <label for="passwordElementID" class="mb-3 text-5xl text-white md:text-5xl">Clave: </label>
+                <input name="password" id="passwordElementID" class="mb-3 text-5xl text-[#C7C7C7] bg-black/30 md:text-4xl border-2 border-red-500/50" value="Contraseña" />
+            </div>
+            <div>
+                <button type="submit" class="mt-8 px-2 py-2 mb-3 text-5xl text-white bg-black/30 md:text-5xl border-2 border-red-500/50 rounded-xl transition-all duration-100 hover:scale-105 hover:bg-[#610505]" >Iniciar Sesion</button>
+            </div>
         </div>
     </form>
+</div>
 <%- include('partials/foot') %>
