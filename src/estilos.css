@@ -27,7 +27,20 @@ body {
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'Scary';
+  src: url('/public/fonts/Scary.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.texto-grande {
+  font-size: 24px;
+}
+
 @theme {
   --font-sans: "RomanAntique", sans-serif;
-  --font-title: "FingerPrinted";
+  --font-title1: "FingerPrinted";
+  --font-title2: "Scary";
 }

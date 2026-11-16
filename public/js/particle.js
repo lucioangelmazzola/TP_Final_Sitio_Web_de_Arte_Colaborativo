@@ -1,6 +1,6 @@
 let partImgs = [];
 let par = [];
-const CANTIDAD_PARTICLES = 10;
+const CANTIDAD_PARTICLES = 15;
 
 function preload() {
     partImgs.push(loadImage('/public/img/Calabaza03.gif'));
@@ -45,7 +45,7 @@ class Particle {
         this.x = random(width);
         this.y = random(height);
         this.img = random(partImgs);
-        this.timer = int(random(60, 100));
+        this.timer = int(random(80, 300));
         this.wait = int(random(90, 300));
         this.visible = false;
     }

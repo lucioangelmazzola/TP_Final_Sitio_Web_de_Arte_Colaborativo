@@ -21,7 +21,7 @@
     --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     --default-font-family: var(--font-sans);
     --default-mono-font-family: var(--font-mono);
-    --font-title: "FingerPrinted";
+    --font-title2: "Scary";
   }
 }
 @layer base {
@@ -383,8 +383,8 @@
   .text-center {
     text-align: center;
   }
-  .font-title {
-    font-family: var(--font-title);
+  .font-title2 {
+    font-family: var(--font-title2);
   }
   .text-7xl {
     font-size: var(--text-7xl);
@@ -504,6 +504,16 @@ body {
   font-weight: normal;
   font-style: normal;
   font-display: swap;
+}
+@font-face {
+  font-family: 'Scary';
+  src: url('/public/fonts/Scary.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+.texto-grande {
+  font-size: 24px;
 }
 @property --tw-translate-x {
   syntax: "*";
