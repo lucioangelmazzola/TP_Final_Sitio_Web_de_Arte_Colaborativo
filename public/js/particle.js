@@ -1,6 +1,6 @@
 let partImgs = [];
 let par = [];
-const CANTIDAD_PARTICLES = 15;
+const CANTIDAD_PARTICLES = 16;
 
 function preload() {
     partImgs.push(loadImage('/public/img/Calabaza03.gif'));

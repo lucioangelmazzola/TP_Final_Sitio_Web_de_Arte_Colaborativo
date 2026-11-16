@@ -390,9 +390,6 @@
   .text-center {
     text-align: center;
   }
-  .font-title2 {
-    font-family: var(--font-title2);
-  }
   .text-7xl {
     font-size: var(--text-7xl);
     line-height: var(--tw-leading, var(--text-7xl--line-height));
