@@ -12,8 +12,6 @@
     --spacing: 0.25rem;
     --text-lg: 1.125rem;
     --text-lg--line-height: calc(1.75 / 1.125);
-    --text-7xl: 4.5rem;
-    --text-7xl--line-height: 1;
     --text-8xl: 6rem;
     --text-8xl--line-height: 1;
     --text-9xl: 8rem;
@@ -390,13 +388,8 @@
   .text-center {
     text-align: center;
   }
-  .text-7xl {
-    font-size: var(--text-7xl);
-    line-height: var(--tw-leading, var(--text-7xl--line-height));
-  }
-  .text-8xl {
-    font-size: var(--text-8xl);
-    line-height: var(--tw-leading, var(--text-8xl--line-height));
+  .font-title2 {
+    font-family: var(--font-title2);
   }
   .text-lg {
     font-size: var(--text-lg);
@@ -543,6 +536,9 @@ body {
 }
 .texto-grande {
   font-size: 24px;
+}
+.texto-title {
+  font-size: 150px;
 }
 @property --tw-translate-x {
   syntax: "*";
