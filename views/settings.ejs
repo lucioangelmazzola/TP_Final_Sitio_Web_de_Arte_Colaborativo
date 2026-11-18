@@ -3,10 +3,13 @@
 <%- include('partials/nav') %>
 
 <div class="relative z-10 flex min-h-[calc(100vh-80px)] flex-col items-center justify-center px-2 py-8 text-center">
+    <!-- Imagen animada -->
     <img src="/public/img/CuadroPerfilT.gif" alt="MarcoP" class="absolute inset-0 w-full h-full object-fill z-0 pointer-events-none">
 
+    <!-- Titulo -->
     <h1 class="font-title3 mb-6 text-6xl text-white md:text-7xl z-10">Configuración</h1>
 
+    <!-- Formulario para enviar archivos y cambios de usuario al servidor -->
     <form action="/user/settings" method="POST" enctype="multipart/form-data" class="relative z-10 flex flex-col items-center gap-6 w-full max-w-3xl bg-black/75 border-2 border-[#332422] rounded-2xl p-8 md:p-12 shadow-2xl shadow-red-950/80 text-white">
         
         <!-- Vista previa circular de la foto actual o elegida -->
@@ -46,16 +49,27 @@
     </form>
 </div>
 
-<!-- Script para actualizar la vista previa circular apenas elegís la foto -->
+<!-- Script que actualizar la vista previa al elegir la foto -->
 <script>
+    // Obtiene las referencias del input y de la imagen de vista previa
     const inputAvatar = document.getElementById('avatarID');
     const avatarPreview = document.getElementById('avatarPreview');
 
+    // Detecta cuando el usuario selecciona un archivo nuevo
     inputAvatar.addEventListener('change', () => {
-        if (inputAvatar.files && inputAvatar.files[0]) {
+        // Verifica que exista un archivo seleccionado
+            if (inputAvatar.files && inputAvatar.files[0]) {
+        // Crea una URL temporal local y actualiza la imagen
             avatarPreview.src = URL.createObjectURL(inputAvatar.files[0]);
         }
     });
 </script>
+
+<!-- Muestra un cartel de advertencia si el nombre de usuario ya está ocupado -->
+<% if (locals.error) { %>
+    <div class="w-full max-w-md px-4 py-3 rounded-xl bg-red-950/90 border-2 border-red-500 text-red-200 text-xl font-title2">
+        <%= error %>
+    </div>
+<% } %>
 
 <%- include('partials/foot') %>

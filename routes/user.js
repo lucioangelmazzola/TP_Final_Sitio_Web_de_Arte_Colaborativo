@@ -40,6 +40,7 @@ function restricted(req, res, next) {
 
 router.use(restricted);
 
+// Diccionario de todos los monstruos, descripciones e imagenes
 const monstruos = {
     ciervo: {
         titulo: 'EL CIERVO',
@@ -63,12 +64,12 @@ const monstruos = {
     }
 };
 
-// Mostrar el test
+// Muestra el test
 router.get('/cuestionario', (req, res) => {
     res.render('cuestionario');
 });
 
-// Calcular el monstruo ganador
+// Calcula el monstruo ganador
 router.post('/cuestionario', (req, res) => {
     const puntos = { ciervo: 0, arana: 0, espectro: 0, oso: 0 };
 
@@ -97,6 +98,7 @@ router.post('/cuestionario', (req, res) => {
  */
 
 router.get('/', (req, res, next) => {
+    // Obtiene la informacion del usuario
     const username = req.session.user;
     const userImages = db.getAllUserImages(username);
     const imgPaths = userImages.map(entry => '/uploads/' + entry.filehash);
@@ -130,6 +132,7 @@ router.get('/profile', (req, res, next) => {
  * Página de configuración de usuario/a.
  */
 
+// Muestra el formulario de configuracion
 router.get('/settings', (req, res, next) => {
     const username = req.session.user;
     res.render('settings', { 
@@ -138,6 +141,7 @@ router.get('/settings', (req, res, next) => {
     });
 });
 
+// Procesa los cambios en la cuenta del usuario
 router.post('/settings', (req, res, next) => {
     const form = formidable({
         uploadDir: 'uploads',
@@ -165,10 +169,16 @@ router.post('/settings', (req, res, next) => {
         const newUsername = fields.newUsername ? fields.newUsername[0].trim() : '';
         const newPassword = fields.newPassword ? fields.newPassword[0].trim() : '';
 
+        // Verifica que el nombre no se haya usado
         if (newUsername && newUsername !== username && db.userExists(newUsername)) {
-            return res.send('<script>alert("Ese nombre de usuario ya existe."); window.location.href="/user/settings";</script>');
+            return res.render('settings', {
+                pageTitle: 'Configuración',
+                avatar: db.getUserAvatar(username) || '/public/img/avatar-default.gif',
+                error: 'Ese nombre de usuario ya existe. Elegí otro.'
+            });
         }
 
+        // Encripta los nuevos datos
         if (newUsername || newPassword) {
             let newHash = null;
             if (newPassword) {
@@ -177,7 +187,7 @@ router.post('/settings', (req, res, next) => {
 
             db.updateUser(username, newUsername, newHash);
 
-            // Actualiza la sesión y se mueve su avatar al nuevo nombre
+            // Actualiza la sesión y mueve su avatar al nuevo nombre
             if (newUsername && newUsername !== username) {
                 req.session.user = newUsername;
             }
@@ -192,6 +202,7 @@ router.post('/settings', (req, res, next) => {
  * Endpoint para subir archivos.
  */
 
+// Muestra el formulario de subida junto con las imágenes ya cargadas del usuario.
 router.get('/upload', (req, res, next) => {
     const username = req.session.user;
     const userImages = db.getAllUserImages(username);
@@ -199,7 +210,7 @@ router.get('/upload', (req, res, next) => {
     res.render('upload', { pageTitle: 'Página para subir archivos', images: imgPaths });
 });
 
-
+// Guarda las imágenes subidas en el servidor y en la base de datos.
 router.post('/upload', (req, res, next) => {
     const form = formidable({
         uploadDir: 'uploads',
@@ -217,6 +228,7 @@ router.post('/upload', (req, res, next) => {
 
         const username = req.session.user;
 
+        // Registra cada imagen subida en la tabla user_images.
         for(let img of files.userFiles) {
             db.addUserImage(username, img.newFilename, img.originalFilename, fields.descImg[0]);
         }

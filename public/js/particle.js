@@ -1,3 +1,4 @@
+// Clase para que los GIF aparezcan aleatoriamente en la pantalla
 let partImgs = [];
 let par = [];
 const CANTIDAD_PARTICLES = 16;
@@ -31,7 +32,7 @@ function setup() {
 }
 
 function draw() {
-    clear(); // Mantiene el canvas transparente para que se vea tu fondo.jpeg
+    clear(); // Mantiene el canvas transparente
 
     for (let p of par) {
         p.update();
@@ -43,7 +44,6 @@ function windowResized() {
     resizeCanvas(windowWidth, windowHeight);
 }
 
-// --- Tu clase original ---
 class Particle {
     constructor() {
         this.reset();

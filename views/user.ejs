@@ -2,20 +2,26 @@
 <div id="canvas-particulas" class="fixed inset-0 pointer-events-none z-1"></div>
 <%- include('partials/nav') %>
 <div class="relative z-10 flex min-h-[calc(100vh-80px)] flex-col items-center justify-center px-2 text-center">
+    <!-- Cuadro de perfil -->
     <section class="relative z-10 w-full max-w-5xl bg-black/75 border-2 border-[#332422] rounded-2xl p-8 md:p-12 shadow-2xl shadow-red-950/80 text-white">
 
+    <!-- Titulo personalizado -->
         <h1 class="font-title2 text-7xl text-white md:text-7xl z-10">Perfil de <%= user %></h1>
+        <!-- Foto de perfil -->
         <div class="relative z-10 mb-4">
             <img src="<%= avatar %>" alt="Foto de perfil" class="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-4 border-red-800 shadow-2xl shadow-red-950/90 bg-black/80">
         </div>
 
         <div class="flex flex-col md:flex-row items-center justify-between border-b border-[#332422] pb-6 mb-6 gap-4">
+            <!-- Texto -->
             <p class="text-[#C7C7C7] text-2xl">Mis imagenes guardadas</p>
+            <!-- Boton de subida -->
             <a href="/user/upload" class="bg-black/80 hover:bg-[#610505] text-white font-title2 text-xl px-6 py-2 rounded-xl border-2 border-red-500/50 transition-all duration-100 hover:scale-105">
                 + Subir imagen
             </a>
         </div>
 
+        <!-- Si no hay imagenes en su cuenta, se muestra el texto, si no, carga las imagenes-->
         <% if (locals.images && locals.images.length > 0) { %>
             <%- include('partials/galeria') %>
         <% } else { %>

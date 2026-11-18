@@ -1,9 +1,11 @@
     <footer class="relative z-10 bg-black/80 border-2 border-red-900 px-6 py-3 text-sm text-gray-200 shadow-lg">
+        <!-- Texto con creditos -->
         <p class="texto-grande">
             Autor/a: Lucio Mazzola, Catalina Carou y Sebastian Fausto<br>
         </p>
     </footer>
 
+    <!-- Si la pagina no es la principal, aparece el boton volver -->
     <% if (locals.pageTitle !== 'Página principal') { %>
         <a class="bg-black/80 hover:bg-[#610505] fixed bottom-6 right-6 z-20 text-white font-title2 text-xl px-6 py-2 rounded-xl border-2 border-red-500/50 transition-all duration-100 hover:scale-105" href="/">Volver</a>
     <% } %>

@@ -1,4 +1,6 @@
+<!-- Contenedor del nav -->
 <nav aria-label="Navegación principal">
+    <!-- Boton hamburguesa -->
     <button
         id="drawer-toggle"
         type="button"
@@ -11,12 +13,14 @@
         <span class="block h-0.5 w-8 bg-white"></span>
     </button>
 
+    <!-- Fondo oscuro -->
     <div
         id="drawer-backdrop"
         class="pointer-events-none fixed inset-0 z-40 bg-black/30 opacity-0 transition-opacity duration-300"
         aria-hidden="true">
     </div>
 
+    <!-- Panel lateral deslizable -->
     <aside
         id="side-drawer"
         class="fixed right-0 top-0 z-50 flex h-screen w-64 max-w-[85vw] translate-x-full flex-col bg-black/85 px-6 pb-8 pt-20 text-white shadow-xl transition-transform duration-300 ease-in-out"
@@ -24,7 +28,9 @@
         aria-hidden="true"
         inert>
 
+        <!-- Contenedor central de las URL -->
         <div class="flex flex-1 flex-col justify-center gap-5 text-center">
+            <!-- Si es usuario -->
             <% if (user) { %>
                 <a class="font-title2 py-1 text-xl hover:text-gray-300" href="/user/cuestionario">Cuestionario</a>
                 <hr class="border-white/80">
@@ -36,12 +42,14 @@
                 <a class="font-title2 py-1 text-xl hover:text-gray-300" href="/obra">Obra Colaborativa</a>
 
                 <hr class="border-white/80">
+            <!-- Si no es usuario -->
             <% } else { %>
                 <a class="font-title2 py-1 text-xl hover:text-gray-300" href="/login">Iniciar Sesión</a>
                 <a class="font-title2 py-1 text-xl hover:text-gray-300" href="/signup">Registrarse</a>
             <% } %>
         </div>
 
+        <!-- Si es usuario permite cerrar sesion -->
         <% if (user) { %>
             <a class="font-title2 py-1 text-xl hover:text-gray-300" href="/user/logout">
                 Cerrar Sesión

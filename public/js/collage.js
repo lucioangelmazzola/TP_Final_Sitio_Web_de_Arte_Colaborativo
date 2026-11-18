@@ -1,5 +1,7 @@
+// Busca el contenedor
 const contenedorCollage = document.getElementById('contenedor-canvas-p5');
 
+// Si lo encuentra
 if (contenedorCollage) {
     // Pide los datos necesarios
     fetch('/obra/data')
@@ -10,8 +12,10 @@ if (contenedorCollage) {
         .catch(err => console.error('Error cargando datos del collage:', err));
 }
 
+// Inicia el sketch
 function iniciarSketchCollage(datos) {
     new p5((p) => {
+        // Arrays con las fotos guardadas
         let piezas = [];
 
         p.setup = () => {
@@ -19,10 +23,11 @@ function iniciarSketchCollage(datos) {
             let alto = 600;
             let canvas = p.createCanvas(ancho, alto);
             canvas.parent('contenedor-canvas-p5');
+            // Centra el punto de dibujo de las imágenes y usa grados para rotar
             p.imageMode(p.CENTER);
             p.angleMode(p.DEGREES);
 
-            // Carga cada imagen de la base de datos
+            // Carga cada imagen de la base de datos y da una pocision aleatoria
             for (let item of datos) {
                 let ruta = '/uploads/' + item.filehash;
                 p.loadImage(ruta, (imgCargada) => {
@@ -42,6 +47,7 @@ function iniciarSketchCollage(datos) {
             }
         };
 
+        // Asigna nuevas coordenadas y angulos aleatorios a cada foto
         function PosicionesR() {
             for (let pieza of piezas) {
                 pieza.targetX = p.random(120, p.width - 120);
@@ -59,6 +65,7 @@ function iniciarSketchCollage(datos) {
                 PosicionesR();
             }
 
+            // Dibuja cada foto del array
             for (let pieza of piezas) {
                 // Movimiento suave
                 pieza.x = p.lerp(pieza.x, pieza.targetX, 0.05);

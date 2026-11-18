@@ -7,42 +7,45 @@
 
     <form action="/user/upload" method="POST" enctype="multipart/form-data" class="relative z-10 w-full max-w-5xl bg-black/75 border-2 border-[#332422] rounded-2xl p-8 md:p-12 shadow-2xl shadow-red-950/80 text-white">
         <div>
+            <!-- Texto -->
             <label for="datosID" class="mb-3 text-5xl text-white md:text-5xl">Archivos de imagen</label>
+            <!-- Input de imagenes -->
             <input type="file" name="userFiles" id="datosID" accept="image/png, image/jpeg" multiple required class="mb-3 text-2xl text-[#C7C7C7] file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-2 file:border-red-500/50 file:text-3xl file:text-white file:bg-black/30 hover:file:bg-[#610505] file:transition-all file:duration-100 file:cursor-pointer">
+            <!-- Contenedor vacio -->
             <div id="previewContainer" class="flex flex-wrap justify-center gap-4 my-4"></div>
         </div>
         <div>
+            <!-- Texto -->
             <label for="descID" class="mb-3 text-5xl text-white md:text-5xl">Descripción: </label>
+            <!-- Descripcion obligatoria -->
             <input type="text" name="descImg" id="descID" class="mb-3 text-5xl text-[#C7C7C7] bg-black/30 md:text-4xl border-2 border-red-500/50" required>
         </div>
         <div>
+            <!-- Boton de envio -->
             <input type="submit" name="submit" class="mt-8 px-2 py-2 mb-3 text-5xl text-white bg-black/30 md:text-5xl border-2 border-red-500/50 rounded-xl transition-all duration-100 hover:scale-105 hover:bg-[#610505]">
         </div>
     </form>
 </div>
 
 <script>
-// Guarda en variables los dos elementos HTML que vamos a usar:
-// el input de archivos (por su id="datosID") y el div vacío donde irán las fotos.
+// Guarda en variables los elementos HTML, el input de archivos y el div
     const inputArchivos = document.getElementById('datosID');
     const previewContainer = document.getElementById('previewContainer');
 
-// "addEventListener" queda esperando a que el usuario elija archivos.
-// Apenas cerrás la ventana de selección de archivos de Windows, se ejecuta lo de adentro.
+// "addEventListener" espera a que el usuario elija archivos
+// Apenas se cierra la ventana de selección de archivos de Windows, se ejecuta lo de adentro
     inputArchivos.addEventListener('change', () => {
         previewContainer.innerHTML = ''; // Limpia las vistas previas anteriores
 
-// Recorre uno por uno todos los archivos seleccionados (porque el input tiene el atributo "multiple").
+// Recorre uno por uno todos los archivos seleccionados
         for (const archivo of inputArchivos.files) {
-// Crea una etiqueta <img> nueva en memoria (como escribir <img> en HTML).
+// Crea una etiqueta <img> nueva en memoria
             const img = document.createElement('img');
-// Crea una URL temporal local que apunta directo al archivo en tu computadora
-// (sin necesidad de haberlo subido todavía al servidor) y se la asigna al src de la imagen.
+// Crea una URL temporal local del archivo en tu computadora y se la asigna al src de la imagen
             img.src = URL.createObjectURL(archivo);
-// Le aplica clases de Tailwind para darle tamaño cuadrado (160x160px),
-// recortarla sin deformar (object-cover), redondear puntas y ponerle borde rojo.
+// La decora
             img.className = 'w-40 h-40 object-cover rounded-xl border-2 border-red-500/50 shadow-lg';
-// Mete esa etiqueta <img> ya armada adentro del <div id="previewContainer"> para que se vea en pantalla.
+// Mete la etiqueta <img> dentro del <div id="previewContainer"> para que se vea en pantalla
             previewContainer.appendChild(img);
         }
     });

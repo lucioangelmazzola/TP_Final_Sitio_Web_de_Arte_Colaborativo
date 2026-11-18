@@ -1,8 +1,12 @@
 <!-- Cuadrícula de miniaturas -->
 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+    <!-- Recorre todas las imagenes del usuario -->
     <% for (let img of locals.images) { %>
+        <!-- Clic para imagen completa -->
         <div onclick="abrirImagen('<%= img %>')" class="group relative overflow-hidden rounded-xl border-2 border-red-900/70 bg-black/80 p-3 shadow-xl shadow-red-950/60 transition-all duration-200 hover:border-red-500 cursor-pointer">
+            <!-- Marco que recorta al hacer zoom -->
             <div class="overflow-hidden rounded-lg">
+                <!-- Imagen chica con efecto de agrandado al pasar el mouse -->
                 <img src="<%= img %>" alt="imagen de usuario" class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105">
             </div>
         </div>
@@ -17,16 +21,19 @@
 </div>
 
 <script>
+    // Guarda las referencias del contenedor modal y de la imagen ampliada
     const modal = document.getElementById('modalImagen');
     const imagenGrande = document.getElementById('imagenGrande');
 
+    // Carga la ruta de la foto elegida y hace visible el visor
     function abrirImagen(ruta) {
         imagenGrande.src = ruta;
-        modal.classList.remove('hidden'); // Muestra el visor
+        modal.classList.remove('hidden');
     }
 
+    // Vuelve a ocultar el visor y limpia la imagen cargada
     function cerrarImagen() {
-        modal.classList.add('hidden'); // Oculta el visor
+        modal.classList.add('hidden');
         imagenGrande.src = '';
     }
 

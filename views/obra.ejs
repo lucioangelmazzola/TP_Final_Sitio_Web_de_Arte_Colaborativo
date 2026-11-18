@@ -1,9 +1,14 @@
+<!-- Header de Obra -->
 <%- include('partials/headObra') %>
 <div id="canvas-particulas" class="fixed inset-0 pointer-events-none z-1"></div>
 <%- include('partials/nav') %>
+    <!-- Contenedor delante de las partículas -->
     <div class="relative z-10 flex min-h-[calc(100vh-80px)] flex-col items-center justify-center px-4 py-6 text-center">
+        <!-- Titulo -->
         <h1 class="font-title2 mb-4 text-5xl md:text-7xl text-white">Obra Colectiva</h1>
+        <!-- Contenedor donde p5.js dibuja el canvas del collage -->
         <div id='contenedor-canvas-p5' class="rounded-xl overflow-hidden border-4 border-red-900 shadow-2xl"></div>
     </div>
 <%- include('partials/foot') %>
+<!-- Script del collage interactivo -->
 <script src="/public/js/collage.js"></script>

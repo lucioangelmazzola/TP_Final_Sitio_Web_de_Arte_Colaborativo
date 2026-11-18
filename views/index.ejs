@@ -1,15 +1,23 @@
+ <!-- Header -->
 <%- include('partials/head') %>
+ <!-- Canvas de las particulas del fondo -->
 <div id="canvas-particulas" class="fixed inset-0 pointer-events-none z-1"></div>
+ <!-- Contenedor que centra todo lo que se agregue -->
 <div class="flex min-h-[calc(100vh-80px)] flex-col items-center justify-center px-2 text-center">
+    <!-- Menu -->
     <%- include('partials/nav') %>
+    <!-- Contenedor para el marco y los textos-->
     <div class="relative z-10 flex flex-col items-center justify-center py-16 px-12 md:py-24 md:px-24 w-full max-w-[1920px]">
 
+        <!-- Imagen del marco -->
         <img src="/public/img/CuadroSesionG.gif" alt="Marco" class="absolute inset-0 w-full h-full object-fill -z-10 pointer-events-none">
 
+        <!-- Textos sobre el marco -->
         <h1 class="font-title3 mb-3 text-7xl text-[#c94a18] md:text-8xl drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">¡BIENVENIDOS A SUS</h1>
         <p class="font-title3 mt-2 text-7xl text-red-800 md:text-9xl drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">PEORES <br>PESADILLAS!</p>
     </div>
 
+    <!-- Si el usuario esta registrado, aparece el boton del cuestionario, si no, lo obliga a iniciar sesion -->
     <% if (locals.user) { %>
         <a href="/user/cuestionario" class="z-10 mt-6 inline-block bg-black/90 hover:bg-[#610505] text-white font-title2 text-2xl tracking-wider px-8 py-3 rounded-xl border-2 border-red-500/50 transition-all duration-100 hover:scale-105">
             ¡Hacer el cuestionario ahora!
@@ -21,4 +29,5 @@
     <% } %>
 </div>
 
+<!-- Footer -->
 <%- include('partials/foot') %>

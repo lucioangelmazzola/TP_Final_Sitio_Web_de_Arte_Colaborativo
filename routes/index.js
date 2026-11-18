@@ -61,8 +61,10 @@ router.post('/signup', notlogged, (req, res, next) => {
     const { username, email, password } = req.body;
 
     if(db.userExists(username)) {
-        res.send('Error: El nombre de usuario ya existe');
-        return
+        return res.render('signup', { 
+            pageTitle: 'Registrarse', 
+            error: 'Ese nombre de usuario ya existe. Elegí otro.' 
+        });
     }
 
     const hash = bcrypt.hashSync(password, 10);

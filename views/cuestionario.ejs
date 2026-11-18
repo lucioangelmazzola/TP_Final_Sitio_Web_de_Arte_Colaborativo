@@ -1,28 +1,38 @@
 <%- include('partials/head') %>
+<!-- Canvas de las particulas del fondo -->
 <div id="canvas-particulas" class="fixed inset-0 pointer-events-none z-1"></div>
 <%- include('partials/nav') %>
 
+<!-- Contenedor principal que centra el cuestionario y lo ubica delante de las partículas -->
 <main class="relative z-10 flex min-h-[calc(100vh-80px)] flex-col items-center justify-center px-4 py-10 text-white">
+    <!-- Titulo -->
     <h1 class="font-title2 mb-6 text-5xl md:text-7xl text-center">Cuestionario "Normal"</h1>
 
+    <!-- Formulario que envía las respuestas por POST al servidor -->
     <form action="/user/cuestionario" method="POST" class="w-full max-w-4xl bg-black/75 border-2 border-[#332422] rounded-2xl p-8 md:p-12 shadow-2xl shadow-red-950/80 flex flex-col gap-8">
         
         <!-- Pregunta 1 -->
         <div class="border-b border-[#332422] pb-6">
+            <!-- Pregunta -->
             <p class="text-2xl md:text-3xl font-bold mb-4 text-red-400">1. Si tuvieras que atravesar una habitación completamente oscura, ¿cómo lo harías?</p>
+            <!-- Lista de respuestas -->
             <div class="flex flex-col gap-3 text-xl text-[#C7C7C7]">
+                <!-- Opción A (suma punto para Oso) -->
                 <label class="flex items-center gap-3 cursor-pointer hover:text-white">
                     <input type="radio" name="p1" value="oso" required class="accent-red-600 w-5 h-5">
                     <span>Avanzaría rápidamente hasta encontrar la salida.</span>
                 </label>
+                <!-- Opción B (suma punto para Espectro) -->
                 <label class="flex items-center gap-3 cursor-pointer hover:text-white">
                     <input type="radio" name="p1" value="espectro" class="accent-red-600 w-5 h-5">
                     <span>Iría despacio, no quisiera chocarme con nada.</span>
                 </label>
+                <!-- Opción C (suma punto para Araña) -->
                 <label class="flex items-center gap-3 cursor-pointer hover:text-white">
                     <input type="radio" name="p1" value="arana" class="accent-red-600 w-5 h-5">
                     <span>Buscaría algo que pueda utilizar para iluminar.</span>
                 </label>
+                <!-- Opción D (suma punto para Ciervo) -->
                 <label class="flex items-center gap-3 cursor-pointer hover:text-white">
                     <input type="radio" name="p1" value="ciervo" class="accent-red-600 w-5 h-5">
                     <span>Esperaría un momento para acostumbrarme a la oscuridad.</span>
@@ -180,8 +190,10 @@
                 <!-- Imagen del monstruo -->
                 <img src="<%= resultado.imagen %>" alt="<%= resultado.titulo %>" class="w-64 h-64 object-cover rounded-xl border-2 border-red-500/50 mb-4 shadow-lg">
                 
+                <!-- Descripcion del monstruo elegido -->
                 <p class="text-xl text-white max-w-2xl"><%= resultado.descripcion %></p>
 
+                <!-- Boton de descarga de monstruo -->
                 <a href="<%= resultado.imagen %>" download="<%= resultado.titulo %>.png" class="px-8 py-3 text-2xl md:text-3xl text-white bg-black/70 border-2 border-red-500/50 rounded-xl transition-all duration-100 hover:scale-105 hover:bg-[#610505]">Descargar mi Monstruo</a>
             </div>
         <% } %>
