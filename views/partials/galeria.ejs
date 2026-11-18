@@ -2,8 +2,17 @@
 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
     <!-- Recorre todas las imagenes del usuario -->
     <% for (let img of locals.images) { %>
+        <!-- Extrae el filehash -->
+        <% const filehash = img.split('/').pop(); %>
         <!-- Clic para imagen completa -->
         <div onclick="abrirImagen('<%= img %>')" class="group relative overflow-hidden rounded-xl border-2 border-red-900/70 bg-black/80 p-3 shadow-xl shadow-red-950/60 transition-all duration-200 hover:border-red-500 cursor-pointer">
+            <!-- Botón de borrar -->
+            <form action="/user/delete-image" method="POST" onclick="event.stopPropagation()" class="absolute top-4 right-4 z-10">
+                <input type="hidden" name="filehash" value="<%= filehash %>">
+                <button type="submit" title="Borrar imagen" class="w-9 h-9 flex items-center justify-center rounded-lg bg-black/85 hover:bg-red-700 text-white border border-red-500/70 text-xl font-bold shadow-md transition cursor-pointer">
+                    &times;
+                </button>
+            </form>
             <!-- Marco que recorta al hacer zoom -->
             <div class="overflow-hidden rounded-lg">
                 <!-- Imagen chica con efecto de agrandado al pasar el mouse -->

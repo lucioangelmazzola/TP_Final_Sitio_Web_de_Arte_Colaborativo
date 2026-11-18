@@ -2,6 +2,9 @@ const express = require('express');
 const { formidable } = require('formidable');
 const bcrypt = require('bcrypt'); // Verificá si en routes/index.js usás 'bcrypt', 'bcryptjs' o 'crypto'
 const db = require('../database/db.js');
+const fs = require('fs');
+const path = require('path');
+
 
 const router = express.Router();
 
@@ -40,6 +43,28 @@ function restricted(req, res, next) {
 
 router.use(restricted);
 
+/**
+ * Borrar una imagen del usuario
+ */
+router.post('/delete-image', (req, res, next) => {
+    const username = req.session.user;
+    const filehash = req.body.filehash;
+
+    if (filehash && db.userImagenExists(username, filehash)) {
+        // Borra el registro de la base de datos
+        db.deleteUserImage(username, filehash);
+
+        // Borra el archivo físico de la carpeta
+        const rutaFisica = path.join(__dirname, '..', 'uploads', filehash);
+        if (fs.existsSync(rutaFisica)) {
+            fs.unlinkSync(rutaFisica);
+        }
+    }
+
+    // Vuelve atrás
+    res.redirect(req.get('Referer') || '/user');
+});
+
 // Diccionario de todos los monstruos, descripciones e imagenes
 const monstruos = {
     ciervo: {
@@ -50,17 +75,17 @@ const monstruos = {
     arana: {
         titulo: 'EL ARACNIDO',
         imagen: '/public/img/AranaM.png',
-        descripcion: 'Es una criatura corpulenta hecha de tela vieja y desgastada que deambula sin rumbo aparente. Curiosa y ruidosa, se acerca a cualquier cosa que llame su atención, sin distinguir entre amigos y enemigos. Aunque su comportamiento parece neutral, su enorme cuerpo y sus movimientos bruscos la convierten en una presencia amenazadora para cualquiera que se cruce en su camino.'
+        descripcion: 'Es una criatura extremadamente inteligente y cautelosa que acecha a sus víctimas desde las sombras. De cuerpo delgado y alargado, utiliza su astucia para manipular la mente de quienes persigue, provocando miedo y confusión hasta conducirlos a trampas cuidadosamente planeadas. Aunque es asustadiza y evita el enfrentamiento directo, puede acorralar a sus presas mediante estrategias y juegos psicológicos, convirtiendo la cacería en una tortura mental.'
     },
     espectro: {
         titulo: 'EL ESPECTRO',
         imagen: '/public/img/FantasmaM.png',
-        descripcion: 'Es una criatura extremadamente inteligente y cautelosa que acecha a sus víctimas desde las sombras. De cuerpo delgado y alargado, utiliza su astucia para manipular la mente de quienes persigue, provocando miedo y confusión hasta conducirlos a trampas cuidadosamente planeadas. Aunque es asustadiza y evita el enfrentamiento directo, puede acorralar a sus presas mediante estrategias y juegos psicológicos, convirtiendo la cacería en una tortura mental.'
+        descripcion: 'Es una entidad demoníaca que acecha silenciosamente a sus víctimas, utilizando su inteligencia para imitar voces, sonidos e incluso comportamientos familiares. Disfruta jugando con la mente de quienes persigue, engañándolos y atrayéndolos hacia situaciones cada vez más aterradoras. Astuta y manipuladora, rara vez ataca directamente: prefiere quebrar psicológicamente a sus presas antes de acabar con ellas.'
     },
     oso: {
         titulo: 'EL OSITO',
         imagen: '/public/img/OsoM.png',
-        descripcion: 'Es una entidad demoníaca que acecha silenciosamente a sus víctimas, utilizando su inteligencia para imitar voces, sonidos e incluso comportamientos familiares. Disfruta jugando con la mente de quienes persigue, engañándolos y atrayéndolos hacia situaciones cada vez más aterradoras. Astuta y manipuladora, rara vez ataca directamente: prefiere quebrar psicológicamente a sus presas antes de acabar con ellas.'
+        descripcion: 'Es una criatura corpulenta hecha de tela vieja y desgastada que deambula sin rumbo aparente. Curiosa y ruidosa, se acerca a cualquier cosa que llame su atención, sin distinguir entre amigos y enemigos. Aunque su comportamiento parece neutral, su enorme cuerpo y sus movimientos bruscos la convierten en una presencia amenazadora para cualquiera que se cruce en su camino.'
     }
 };
 
